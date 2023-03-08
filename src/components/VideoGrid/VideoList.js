@@ -7,11 +7,12 @@ import Error from '../../ui/Error';
 
 export default function VideoList() {
     const dispatch = useDispatch();
+    const { tags: filteredTags, searchedTerm } = useSelector(state => state.filters)
     const { isLoading, videos, isError, error } = useSelector(state => state.videos);
 
     useEffect(() => {
-        dispatch(fetchVideos())
-    }, [dispatch])
+        dispatch(fetchVideos({ filteredTags, searchedTerm }))
+    }, [dispatch, filteredTags, searchedTerm])
 
     //decide what to render in ui
     let content;
