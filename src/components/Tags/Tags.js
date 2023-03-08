@@ -13,7 +13,7 @@ export default function Tags() {
         dispatch(fetchTags())
     }, [dispatch])
 
-    //render what to render in ui
+    //decide what to render in ui
     let content;
     if (isLoading) content = <Loading />
     if (!isLoading && tags.length > 0) content = tags.map(tag => <Tag tag={tag} key={tag.id} />)

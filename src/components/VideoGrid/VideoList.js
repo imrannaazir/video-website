@@ -13,11 +13,11 @@ export default function VideoList() {
         dispatch(fetchVideos())
     }, [dispatch])
 
-    //what to render in ui
+    //decide what to render in ui
     let content;
     if (isLoading) content = <Loading />;
     if (!isLoading && videos.length > 0) content = videos.map(video => <VideoItem video={video} key={video.id} />);
-    if (!isLoading && videos.length === 0) content = <Error>No video found!</Error>;
+    if (!isLoading && !isError && videos.length === 0) content = <Error>No video found!</Error>;
     if (isError) content = <Error>{error}</Error>;
     return (
         <section className="pt-12">
