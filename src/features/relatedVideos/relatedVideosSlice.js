@@ -21,7 +21,22 @@ const relatedVideosSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder
-            .addCase()
+            .addCase(fetchRelatedVideos.pending, (state, action) => {
+                state.isLoading = true;
+                state.videos = {};
+            })
+
+            .addCase(fetchRelatedVideos.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.videos = action.payload;
+            })
+
+            .addCase(fetchRelatedVideos.rejected, (state, action) => {
+                state.isLoading = false;
+                state.videos = {};
+                state.isError = true;
+                state.error = action.error?.message;
+            })
     }
 });
 
